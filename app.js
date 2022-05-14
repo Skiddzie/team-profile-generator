@@ -7,7 +7,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 //importing the page-template.js 
 const main = require('./src/page-template');
-const Employee = require('./lib/Employee');
+// const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern')
@@ -15,12 +15,13 @@ const Intern = require('./lib/Intern')
 //name i believe is just the name of the variable
 //message is what the user is prompted with
 var employees = [];
+var team = "";
 const promptUser = () => {
   return inquirer.prompt([
     {
       type: 'input',
-      name: 'name',
-      message: 'What is your name? (Required)',
+      name: 'teamName',
+      message: 'What is your team name? (Required)',
       validate: nameInput => {
         if (nameInput) {
           return true;
@@ -111,7 +112,7 @@ Add a New Employee
     .then(projectData => {
       portfolioData.projects.push(projectData);
 
-
+      team = portfolioData.teamName;
       if (projectData.type == "manager"){
         employees.push(new Manager(projectData.name, projectData.id, projectData.email, projectData.number));
       } 
@@ -136,7 +137,7 @@ const printEmployee = () => {
     console.log(employees[i].getRole());
     if (employees[i].getRole() == "Manager"){
       page += `
-      <div class="container text-center py-3">
+      <div class="employee">
       <h2>name:${employees[i].name}</h2>
       <h3>id: ${employees[i].id}</h3>
       <h3>office number: ${employees[i].officeNumber}</h3>
@@ -146,7 +147,7 @@ const printEmployee = () => {
     } 
     else if (employees[i].getRole() == "Engineer"){
       page += `
-      <div class="container text-center py-3">
+      <div class="employee">
       <h2>name:${employees[i].name}</h2>
       <h3>id: ${employees[i].id}</h3>
       <h3>github: ${employees[i].github}</h3>
@@ -156,7 +157,7 @@ const printEmployee = () => {
     }
     else if (employees[i].getRole() == "Intern"){
       page += `
-      <div class="container text-center py-3">
+      <div class="employee">
       <h2>name:${employees[i].name}</h2>
       <h3>id: ${employees[i].id}</h3>
       <h3>id: ${employees[i].school}</h3>
@@ -176,16 +177,16 @@ const printPage = () => {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Portfolio Demo</title>
+    <title>${team} Team Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
 
   <body>
     <header>
       <div class="container flex-row justify-space-between align-center py-3">
-        <h1 class="page-title text-secondary bg-dark py-2 px-3"></h1>
+        <h1 class="page-title text-secondary bg-dark py-2 px-3 top">${team}</h1>
         <nav class="flex-row">
         </nav>
       </div>
@@ -193,8 +194,8 @@ const printPage = () => {
     <main class="container my-5">
           ${printEmployee()}
     </main>
-    <footer class="container text-center py-3">
-      <h3 class="text-dark">&copy; ${new Date().getFullYear()} by </h3>
+    <footer class="container text-center py-3 footer">
+      <h3 class="text-dark">&copy; ${new Date().getFullYear()} by ${team}</h3>
     </footer>
   </body>
   </html>
