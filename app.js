@@ -6,7 +6,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 //importing the page-template.js 
-const main = require('./src/page-template');
+// const main = require('./src/page-template');
 // const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
