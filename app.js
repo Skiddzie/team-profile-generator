@@ -138,6 +138,7 @@ const printEmployee = () => {
     if (employees[i].getRole() == "Manager"){
       page += `
       <div class="employee">
+      <h2>${employees[i].getRole()}</h2>
       <h2>name:${employees[i].name}</h2>
       <h3>id: ${employees[i].id}</h3>
       <h3>office number: ${employees[i].officeNumber}</h3>
@@ -148,6 +149,7 @@ const printEmployee = () => {
     else if (employees[i].getRole() == "Engineer"){
       page += `
       <div class="employee">
+      <h2>${employees[i].getRole()}</h2>
       <h2>name:${employees[i].name}</h2>
       <h3>id: ${employees[i].id}</h3>
       <h3>github: ${employees[i].github}</h3>
@@ -158,6 +160,7 @@ const printEmployee = () => {
     else if (employees[i].getRole() == "Intern"){
       page += `
       <div class="employee">
+      <h2>${employees[i].getRole()}</h2>
       <h2>name:${employees[i].name}</h2>
       <h3>id: ${employees[i].id}</h3>
       <h3>id: ${employees[i].school}</h3>
